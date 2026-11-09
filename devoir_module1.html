@@ -1,0 +1,105 @@
+<!DOCTYPE html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><title>Devoir — Module 1 : Informatique</title>
+<style>
+:root{--bg:#f4f6fb;--card:#fff;--tx:#1c2233;--mut:#5b647a;--ac:#3b5bdb;--ok:#2b8a3e;--okb:#e6f6ea;--ko:#c92a2a;--kob:#fdeaea;--bd:#d9deea;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#12151f;--card:#1b2030;--tx:#e8ebf5;--mut:#9aa3bb;--ac:#7c94ff;--ok:#69db7c;--okb:#17301f;--ko:#ff8787;--kob:#3a1c1f;--bd:#2c3348}}
+:root[data-theme=dark]{--bg:#12151f;--card:#1b2030;--tx:#e8ebf5;--mut:#9aa3bb;--ac:#7c94ff;--ok:#69db7c;--okb:#17301f;--ko:#ff8787;--kob:#3a1c1f;--bd:#2c3348}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--tx);font:16px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+main{max-width:760px;margin:0 auto;padding:20px 14px 60px}
+h1{font-size:1.6rem;margin:0}.sub{color:var(--mut);margin:.2rem 0 1rem}
+.id{display:flex;gap:10px;flex-wrap:wrap}.id label{flex:1;min-width:180px;font-size:.9rem;color:var(--mut)}
+input[type=text]{width:100%;padding:8px;border:1px solid var(--bd);border-radius:8px;background:var(--card);color:var(--tx);font:inherit}
+section{background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:16px;margin:16px 0}
+h2{font-size:.8rem;text-transform:uppercase;letter-spacing:.06em;color:var(--ac);margin:0;display:flex;justify-content:space-between}
+h3{margin:.2rem 0}.in{color:var(--mut);margin:.2rem 0 .8rem;font-size:.95rem}
+.row{border:1px solid var(--bd);border-radius:10px;padding:10px 12px;margin:8px 0}
+.row p{margin:0 0 6px}.ch,.line{display:flex;gap:14px;flex-wrap:wrap;align-items:center}.line{justify-content:space-between}
+.ch label{cursor:pointer}.row.ok{background:var(--okb);border-color:var(--ok)}.row.ko{background:var(--kob);border-color:var(--ko)}
+.fix{width:100%;font-size:.9rem;font-weight:600;color:var(--ko);margin-top:6px}.ok .fix{color:var(--ok)}
+.it{display:flex;align-items:center;gap:12px}.it svg{color:var(--tx);flex:none}
+select{padding:8px;border:1px solid var(--bd);border-radius:8px;background:var(--card);color:var(--tx);font:inherit;max-width:100%}
+.sch{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;gap:6px;align-items:center;justify-items:center}
+.box{width:100%;padding:8px;text-align:center}.box select{width:100%}.ar{font-size:1.6rem;color:var(--ac)}
+.tr .it{margin-bottom:6px}.tr label{margin-right:14px;display:inline-block}
+.sc{background:var(--bg);border-left:4px solid var(--ac);padding:10px 12px;border-radius:6px}
+button{background:var(--ac);color:#fff;border:0;border-radius:10px;padding:12px 22px;font:600 1rem inherit;cursor:pointer}
+#res{background:var(--card);border:2px solid var(--ac);border-radius:14px;padding:16px;margin:16px 0}
+@media print{button{display:none}}
+</style></head><body><main>
+<h1 id="t"></h1><p class="sub" id="s"></p>
+<div class="id"><label>Nom et prénom<input type="text" id="nom"></label><label>Classe<input type="text" id="cl"></label></div>
+<div id="app"></div><div id="res" hidden></div><button id="go"></button>
+</main>
+<script>
+const C={"exam": false, "title": "Devoir — Module 1 : Informatique", "sub": "Chapitres 1 et 2 · Entraîne-toi : clique sur « Vérifier » pour voir la correction.", "tf": [["Le scanner est un périphérique d’entrée.", 1, ""], ["Les haut-parleurs sont un périphérique d’entrée.", 0, "ce sont des périphériques de sortie."], ["Il existe deux types de disque dur : le HDD et le SSD.", 1, ""], ["La RAM est très rapide : le processeur y accède directement.", 1, ""], ["Microsoft Excel est un logiciel de base.", 0, "c’est un logiciel d’application (tableur)."], ["Android est un logiciel de base.", 1, ""], ["L’unité de commande (UC) contrôle et coordonne l’exécution des instructions.", 1, ""], ["Donnée + Contexte = Information.", 1, ""], ["Un ordinateur sert uniquement à calculer.", 0, "il reçoit, traite, stocke et restitue des informations."], ["La carte mémoire est un matériel de stockage.", 1, ""], ["Le matériel (hardware) est l’ensemble des éléments physiques que l’on peut toucher.", 1, ""]], "sw": [["Clé USB", "cle", 0], ["Android", "android", 1], ["Haut-parleurs", "hp", 0], ["VLC", "vlc", 1], ["Microsoft Excel", "excel", 1], ["Disque dur", "dd", 0], ["Microphone", "micro", 0]], "items": [["Souris", ["Entrée"], "souris"], ["Caméra", ["Entrée"], "camera"], ["Écran tactile", ["Entrée", "Sortie"], "tactile"], ["Modem", ["Traitement"], "modem"], ["Carte réseau", ["Traitement"], "reseau"], ["Disque dur", ["Stockage"], "dd"], ["Carte mémoire", ["Stockage"], "sd"], ["CD / DVD", ["Stockage"], "cd"], ["Écran", ["Sortie"], "ecran"], ["Microphone", ["Entrée"], "micro"], ["Processeur (CPU)", ["Traitement"], "cpu"], ["Imprimante", ["Sortie"], "imprimante"]], "bonus": {"s": "Omar écoute de la musique avec VLC, depuis une clé USB, sur des haut-parleurs.", "q": [["La clé USB sert ici à quelle fonction ?", ["Entrée", "Sortie", "Traitement", "Stockage"], "Stockage"], ["VLC est un logiciel…", ["de base", "d’application"], "d’application"], ["Les haut-parleurs sont un matériel de…", ["Entrée", "Sortie", "Traitement", "Stockage"], "Sortie"], ["Quand on éteint l’ordinateur, quelle mémoire perd son contenu ?", ["La RAM", "Le disque dur", "La clé USB"], "La RAM"]]}};
+const H=s=>`<g fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">${s}</g>`;
+const IC={
+clavier:H('<rect x="4" y="14" width="40" height="22" rx="3"/><path d="M10 21h4M18 21h4M26 21h4M34 21h4M10 27h4M18 27h4M26 27h4M34 27h4M16 32h16"/>'),
+souris:H('<rect x="14" y="6" width="20" height="36" rx="10"/><path d="M24 6v14M14 20h20"/>'),
+ecran:H('<rect x="5" y="8" width="38" height="26" rx="3"/><path d="M17 42h14M24 34v8"/>'),
+imprimante:H('<path d="M14 16V6h20v10"/><rect x="6" y="16" width="36" height="16" rx="3"/><rect x="14" y="26" width="20" height="14"/>'),
+cle:H('<rect x="14" y="16" width="20" height="26" rx="3"/><rect x="19" y="6" width="10" height="10"/><path d="M22 9v3M26 9v3"/>'),
+hp:H('<rect x="12" y="4" width="24" height="40" rx="4"/><circle cx="24" cy="30" r="8"/><circle cx="24" cy="14" r="3"/>'),
+dd:H('<rect x="5" y="12" width="38" height="24" rx="3"/><circle cx="18" cy="24" r="7"/><path d="M32 24h6"/>'),
+micro:H('<rect x="18" y="5" width="12" height="22" rx="6"/><path d="M12 22a12 12 0 0 0 24 0M24 34v8M17 42h14"/>'),
+ram:H('<rect x="4" y="14" width="40" height="18" rx="2"/><path d="M10 20h5v6h-5zM21 20h5v6h-5zM32 20h5v6h-5zM8 32v6M14 32v6M20 32v6M26 32v6M32 32v6M38 32v6"/>'),
+cpu:H('<rect x="12" y="12" width="24" height="24" rx="2"/><rect x="19" y="19" width="10" height="10"/><path d="M18 6v6M24 6v6M30 6v6M18 36v6M24 36v6M30 36v6M6 18h6M6 24h6M6 30h6M36 18h6M36 24h6M36 30h6"/>'),
+tactile:H('<rect x="5" y="5" width="38" height="30" rx="3"/><path d="M24 42V24a2.5 2.5 0 0 1 5 0v8l7 2v6l-2 3H26z"/>'),
+ssd:H('<rect x="6" y="10" width="36" height="28" rx="3"/><rect x="12" y="16" width="14" height="14"/><path d="M32 18h4M32 24h4M32 30h4"/>'),
+gpu:H('<rect x="4" y="12" width="40" height="22" rx="2"/><circle cx="17" cy="23" r="6"/><circle cx="33" cy="23" r="6"/><path d="M8 34v6h28v-6"/>'),
+scanner:H('<rect x="4" y="28" width="40" height="12" rx="2"/><path d="M8 28l5-12h22l5 12M12 34h24"/>'),
+camera:H('<rect x="4" y="14" width="40" height="26" rx="4"/><circle cx="24" cy="27" r="8"/><path d="M16 14l3-6h10l3 6"/>'),
+modem:H('<rect x="5" y="26" width="38" height="14" rx="3"/><path d="M12 33h1M18 33h1M24 33h1M16 26l-4-14M32 26l4-14"/>'),
+reseau:H('<rect x="6" y="22" width="36" height="16" rx="2"/><rect x="14" y="10" width="12" height="12"/><path d="M17 10v4M20 10v4M23 10v4M12 38v4M20 38v4M28 38v4M36 38v4"/>'),
+sd:H('<path d="M12 6h18l8 8v28H12z"/><path d="M18 6v8M23 6v8M28 6v8"/>'),
+cd:H('<circle cx="24" cy="24" r="18"/><circle cx="24" cy="24" r="5"/><path d="M12 16a14 14 0 0 1 8-6"/>'),
+windows:'<path fill="#0a84ff" d="M6 10l15-2v15H6zM24 7.5l18-2.5v18H24zM6 26h15v15L6 39zM24 26h18v18l-18-2.5z"/>',
+chrome:'<circle cx="24" cy="24" r="19" fill="#ea4335"/><path d="M24 24L7.5 33.5A19 19 0 0 0 24 43z" fill="#34a853"/><path d="M24 24l16.5 9.5A19 19 0 0 1 24 43z" fill="#fbbc04"/><circle cx="24" cy="24" r="8" fill="#fff"/><circle cx="24" cy="24" r="6" fill="#4285f4"/>',
+linux:'<ellipse cx="24" cy="28" rx="13" ry="15" fill="#4a5068"/><ellipse cx="24" cy="32" rx="8" ry="10" fill="#f5f5f5"/><circle cx="24" cy="12" r="8" fill="#4a5068"/><circle cx="21" cy="11" r="1.6" fill="#fff"/><circle cx="27" cy="11" r="1.6" fill="#fff"/><path d="M21 15l3 2 3-2z" fill="#f5a623"/><ellipse cx="17" cy="43" rx="5" ry="2.5" fill="#f5a623"/><ellipse cx="31" cy="43" rx="5" ry="2.5" fill="#f5a623"/>',
+android:'<path d="M8 28a16 16 0 0 1 32 0z" fill="#3ddc84"/><circle cx="18" cy="22" r="1.8" fill="#fff"/><circle cx="30" cy="22" r="1.8" fill="#fff"/><path d="M14 8l4 6M34 8l-4 6" stroke="#3ddc84" stroke-width="2.5" stroke-linecap="round"/><rect x="8" y="30" width="32" height="12" rx="3" fill="#3ddc84"/>',
+vlc:'<path d="M24 6l14 32H10z" fill="#ff8800"/><path d="M19 22h10l2 7H17z" fill="#fff"/><rect x="8" y="38" width="32" height="5" rx="2" fill="#6b7280"/>',
+excel:'<rect x="5" y="5" width="38" height="38" rx="5" fill="#1d6f42"/><path d="M16 15l16 18M32 15L16 33" stroke="#fff" stroke-width="4" stroke-linecap="round"/>'};
+const E=["Entrée","Sortie","Traitement","Stockage"],SA=["Entrée","Traitement","Sortie","Stockage"];
+const W=[.5,.5,.5,.75,.5],N=[C.tf.length,C.sw.length,4,C.items.length,C.bonus.q.length],P=N.map((n,i)=>n*W[i]);
+const sh=a=>[...a].sort(()=>Math.random()-.5),U=[],$=i=>document.getElementById(i);
+let S=0,id=0,o="";
+const sec=(t,intro)=>{S++;return `<section><h2><span>Exercice ${S==5?"bonus":S}</span><span>${P[S-1]} pts</span></h2><h3>${t}</h3><p class="in">${intro}</p>`};
+const add=(s,ok,fix,row)=>U.push({s,ok,fix,row});
+const opts=l=>`<option value="">— choisir —</option>`+l.map(e=>`<option>${e}</option>`).join("");
+const sel=r=>document.querySelector(`#${r} select`).value;
+$("t").textContent=C.title;$("s").textContent=C.sub;$("go").textContent=C.exam?"Terminer l’examen":"Vérifier mes réponses";
+o+=sec("Vrai ou faux","Coche la bonne réponse pour chaque affirmation.");
+sh(C.tf).forEach(([t,a,c],i)=>{const r="r"+id++;
+o+=`<div class="row" id="${r}"><p>${i+1}. ${t}</p><div class="ch"><label><input type="radio" name="${r}" value="1"> Vrai</label><label><input type="radio" name="${r}" value="0"> Faux</label></div><div class="fix" hidden></div></div>`;
+add(0,()=>{const x=document.querySelector(`input[name=${r}]:checked`);return !!x&&x.value==(a?1:0)},(a?"Vrai":"Faux")+(c?" — "+c:""),r)});
+o+="</section>"+sec("Matériel ou logiciel ?","Observe l’image et classe chaque élément : matériel (hardware) ou logiciel (software).");
+sh(C.sw).forEach(([n,ic,a])=>{const r="r"+id++;
+o+=`<div class="row line" id="${r}"><span class="it"><svg viewBox="0 0 48 48" width="52" height="52" role="img" aria-label="${n}">${IC[ic]}</svg><b>${n}</b></span><select>${opts(["Matériel","Logiciel"])}</select><div class="fix" hidden></div></div>`;
+add(1,()=>sel(r)==(a?"Logiciel":"Matériel"),"Réponse : "+(a?"logiciel":"matériel"),r)});
+o+="</section>"+sec("Schéma fonctionnel","Complète chaque case du schéma fonctionnel d’un ordinateur avec : Entrée, Traitement, Sortie ou Stockage.")+`<div class="sch">`;
+[["1","1"],["3","1"],["5","1"],["3","3"]].forEach((p,k)=>{const r="r"+id++;
+o+=`<div class="row box" id="${r}" style="grid-column:${p[0]};grid-row:${p[1]}"><select>${opts(E)}</select><div class="fix" hidden></div></div>`;
+add(2,()=>sel(r)==SA[k],"→ "+SA[k],r)});
+o+=`<div class="ar" style="grid-column:2;grid-row:1">→</div><div class="ar" style="grid-column:4;grid-row:1">→</div><div class="ar" style="grid-column:3;grid-row:2">↕</div></div></section>`;
+o+=sec("Classer les matériels","Coche la ou les colonnes qui conviennent. Attention : un matériel peut appartenir à deux catégories.");
+sh(C.items).forEach(([n,a,ic])=>{const r="r"+id++;
+o+=`<div class="row tr" id="${r}"><span class="it"><svg viewBox="0 0 48 48" width="52" height="52" role="img" aria-label="${n}">${IC[ic]}</svg><b>${n}</b></span>${E.map(e=>`<label><input type="checkbox" value="${e}"> ${e}</label>`).join("")}<div class="fix" hidden></div></div>`;
+add(3,()=>[...document.querySelectorAll(`#${r} input:checked`)].map(x=>x.value).sort().join()==[...a].sort().join(),"Réponse : "+a.join(" + "),r)});
+o+="</section>"+sec("Question bonus ⭐","Lis la situation, puis réponds.")+`<p class="sc">${C.bonus.s}</p>`;
+C.bonus.q.forEach(([q,op,a],i)=>{const r="r"+id++;
+o+=`<div class="row" id="${r}"><p>${i+1}. ${q}</p><select>${opts(op)}</select><div class="fix" hidden></div></div>`;
+add(4,()=>sel(r)==a,"Réponse : "+a,r)});
+o+="</section>";$("app").innerHTML=o;
+$("go").onclick=()=>{
+if(C.exam){if(!$("nom").value.trim()){alert("Écris ton nom avant de terminer.");return}
+if(!confirm("Terminer l’examen ? Tu ne pourras plus modifier tes réponses."))return}
+const per=[0,0,0,0,0];
+U.forEach(u=>{const k=u.ok(),r=$(u.row);if(k)per[u.s]+=W[u.s];
+if(!C.exam){r.classList.add(k?"ok":"ko");if(!k){const f=r.querySelector(".fix");f.textContent=u.fix;f.hidden=false}}});
+document.querySelectorAll("input,select").forEach(e=>e.disabled=true);
+const q=x=>Math.round(x*4)/4,nm=["Vrai ou faux","Logiciels","Schéma fonctionnel","Classement des matériels","Bonus"];
+const main=q(per[0]+per[1]+per[2]+per[3]);
+$("res").innerHTML=`<h2><span>Résultat</span></h2><h3>${main} / 20${per[4]?` <small>(+ ${q(per[4])} bonus)</small>`:""}</h3><ul>${per.map((p,i)=>`<li>${nm[i]} : ${q(p)} / ${P[i]}</li>`).join("")}</ul>`+
+(C.exam?`<p>Élève : ${$("nom").value} · Classe : ${$("cl").value||"—"}<br>Fais une capture d’écran de cette page et envoie-la à ton enseignant.</p>`:`<p>Les erreurs sont en rouge avec la bonne réponse.</p><button onclick="location.reload()">Recommencer</button>`);
+$("res").hidden=false;$("go").hidden=true;$("res").scrollIntoView({behavior:"smooth"})};
+</script></body></html>
